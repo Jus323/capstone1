@@ -4,22 +4,25 @@ import { LoginPage } from './pages/LoginPage'
 import { SignUpPage } from './pages/SignUpPage'
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import './App.css';
+import { AuthProvider } from './hooks/useAuth';
 
 function App() {
   return (
     <div className="App">
-    <Routes>
-      <Route path="/" element={<LoginPage />} />
-      <Route path="/register" element={<SignUpPage />} />
-      <Route
-        path="/home"
-        element={
-          <ProtectedRoute>
-            <HomePage />
-          </ProtectedRoute>
-        }
-      />
-    </Routes>
+      <AuthProvider>
+        <Routes>
+          <Route path="/" element={<LoginPage />} />
+          <Route path="/register" element={<SignUpPage />} />
+          <Route
+            path="/home"
+            element={
+              <ProtectedRoute>
+                <HomePage />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+      </AuthProvider>
     </div>
   );
 }
