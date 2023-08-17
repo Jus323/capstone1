@@ -1,7 +1,8 @@
 import { Routes, Route } from 'react-router-dom'
 import { HomePage } from './pages/HomePage'
 import { LoginPage } from './pages/LoginPage'
-import { SignUpPage } from './pages/SignUpPage'
+import { RegisterPage } from './pages/RegisterPage'
+import { ForgotPasswordPage } from './pages/ForgotPasswordPage'
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import './App.css';
 import { AuthProvider } from './hooks/useAuth';
@@ -12,7 +13,8 @@ function App() {
       <AuthProvider>
         <Routes>
           <Route path="/" element={<LoginPage />} />
-          <Route path="/register" element={<SignUpPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/forgotpassword" element={<ForgotPasswordPage />} />
           <Route
             path="/home"
             element={

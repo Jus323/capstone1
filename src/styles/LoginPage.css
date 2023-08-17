@@ -69,3 +69,18 @@ button:hover {
     color: #3324be;
     text-decoration: none;
 }
+
+.submit_type{
+    text-transform: uppercase;
+    outline: 0;
+    background: #3324be;
+    width: 100%;
+    border: 0;
+    padding: 15px;
+    color: #FFFFFF;
+    font-size: 14px;
+    border-radius:15px;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
+}

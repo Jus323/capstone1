@@ -6,8 +6,8 @@ export const LoginPage = () =>
   <div className="app">
     <div className="login-form">
       <h1>LOGIN</h1>
-      <input type="text" id="email" placeholder="Email"></input>
-      <input type="text" id="pwd" placeholder="Password"></input>
+      <input type="email" id="email" placeholder="Email"></input>
+      <input type="password" id="pwd" placeholder="Password"></input>
       <button>Login</button>
 
       <p className="message">
@@ -18,7 +18,7 @@ export const LoginPage = () =>
       </p>
       <p className="message">
         Forgot password? &nbsp;
-        <RouterLink to="/register">
+        <RouterLink to="/forgotpassword">
           Click here
         </RouterLink>
       </p>
