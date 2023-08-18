@@ -5,13 +5,20 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useLocalStorage("user", null);
+  const [users, setUsers] = useLocalStorage("users", [])
   const navigate = useNavigate();
 
   // call this function when you want to authenticate the user
   const login = useCallback(async (data) => {
-    setUser(data);
-    navigate("/profile");
-  }, [navigate, setUser]);
+    const userFound = users.find((user) => user.email === data.email && user.password === data.password)
+    if (userFound) {
+      setUser(userFound);
+      navigate("/home");
+      return true
+    } else {
+      return false
+    }
+  }, [navigate, setUser, users]);
 
   // call this function to sign out logged in user
   const logout = useCallback(() => {
@@ -19,13 +26,22 @@ export const AuthProvider = ({ children }) => {
     navigate("/", { replace: true });
   },[navigate, setUser]);
 
+  const addUser = useCallback( async (newUser) => {
+    const exists = users.some((user) => user.nric === newUser.nric)
+    if (!exists) {
+      setUsers([...users, newUser])
+    }
+    return !exists
+  }, [users, setUsers])
+
   const value = useMemo(
     () => ({
       user,
       login,
-      logout
+      logout,
+      addUser
     }),
-    [user, login, logout]
+    [user, login, logout, addUser]
   );
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

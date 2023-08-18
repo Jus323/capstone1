@@ -7,16 +7,39 @@ import { ProtectedRoute } from "./components/ProtectedRoute";
 import './App.css';
 import { AuthProvider } from './hooks/useAuth';
 import { ProfileEditPage } from './pages/ProfileEditPage'
+import { UnprotectedRoute } from './components/UnprotectedRoute'
 
 function App() {
   return (
     <div className="App">
       <AuthProvider>
         <Routes>
-          <Route path="/" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/forgotpassword" element={<ForgotPasswordPage />} />
-          <Route path="/profileedit" element={<ProfileEditPage />} />
+          <Route 
+            path="/" 
+            element={
+              <UnprotectedRoute>
+                <LoginPage />
+              </UnprotectedRoute>
+            } 
+          />
+          <Route path="/register" element={
+              <UnprotectedRoute>
+                <RegisterPage />
+              </UnprotectedRoute>
+            }  />
+          <Route path="/forgotpassword" element={
+              <UnprotectedRoute>
+                <ForgotPasswordPage />
+              </UnprotectedRoute>
+            }  />
+          <Route 
+            path="/profileedit" 
+            element={
+              <ProtectedRoute>
+                <ProfileEditPage />
+              </ProtectedRoute>
+              } 
+          />
           <Route
             path="/home"
             element={
