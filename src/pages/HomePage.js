@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
+import { Link as RouterLink } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 
 export const HomePage = () => {
@@ -30,7 +31,11 @@ export const HomePage = () => {
         <Button variant="dark"> Deposit </Button>
         <Button variant="dark">Withdraw</Button>
         <button onClick={logout}>Logout</button>
-      </div>
+        <p className="message">
+          Profile Edit &nbsp;
+          <RouterLink to="/profileedit">Update Profile</RouterLink>
+        </p>
+        </div>
     </div>
   );
 };
