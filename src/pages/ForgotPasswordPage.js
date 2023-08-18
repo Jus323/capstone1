@@ -1,28 +1,41 @@
-import React from 'react'
-import '../styles/LoginPage.css' // same style as for Loginpage
-// import { Link as RouterLink } from 'react-router-dom'
+import React, {useState} from 'react'
+import '../styles/ForgotPasswordPage.css'
+import {useAuth} from "../hooks/useAuth"
 
-export const ForgotPasswordPage = () => (
+export const ForgotPasswordPage = () => {
+
+  const { resetPassword } = useAuth()
+  const [credentials, setCredentials] = useState({
+    email: "",
+    password: ""
+  })
+
+  const handleEmailChange = (e) => {
+    setCredentials({...credentials, email: e.target.value})
+  }
+  const handlePasswordChange = (e) => {
+      setCredentials({...credentials, password: e.target.value})
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    resetPassword(credentials).then((success) => {
+      if (!success) {
+        alert("User does not exist")
+      }
+    })
+  }
+  
+  return (
   <div className="app">
     <div className="login-form">
       <h1>Reset Password</h1>
 
-      <form action='\'> 
-        <div>
-            <label for="email">Email  </label> 
-            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-            <span class="material-symbols-outlined">mail</span>
-            <input type="email" id="email" placeholder="Email"></input>
-        </div>
-        <div>
-            <label for="new_pwd">New Password  </label>
-            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-            <span class="material-symbols-outlined">pets</span>
-            <input type="password" id="new_pwd" placeholder="New Password"></input>
-        </div>
-
-        <input type='submit' class="submit_type" value="Reset"></input>
+      <form onSubmit={handleSubmit}> 
+      <input type="email" id="email" value={credentials.email} onChange={handleEmailChange} placeholder="Email"></input>
+      <input type="password" id="password" value={credentials.password} onChange={handlePasswordChange} placeholder="Password"></input>
+        <button type='submit'>Reset</button>
       </form>
     </div>
   </div>
-);
+)}

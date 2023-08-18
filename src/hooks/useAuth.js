@@ -26,6 +26,7 @@ export const AuthProvider = ({ children }) => {
     navigate("/", { replace: true });
   },[navigate, setUser]);
 
+  // call this function to register a new user
   const addUser = useCallback( async (newUser) => {
     const exists = users.some((user) => user.nric === newUser.nric)
     if (!exists) {
@@ -34,14 +35,27 @@ export const AuthProvider = ({ children }) => {
     return !exists
   }, [users, setUsers])
 
+  // call this to reset a user's password
+  const resetPassword = useCallback(async (data) => {
+    const userFound = users.find((user) => user.email === data.email)
+    if (userFound) {
+      setUsers(users.filter((user) => user.id !== userFound.id).concat([{...userFound, password: data.password}]));
+      navigate("/");
+      return true
+    } else {
+      return false
+    }
+  }, [navigate, setUsers, users]);
+
   const value = useMemo(
     () => ({
       user,
       login,
       logout,
-      addUser
+      addUser,
+      resetPassword
     }),
-    [user, login, logout, addUser]
+    [user, login, logout, addUser, resetPassword]
   );
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
