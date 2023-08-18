@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 export const HomePage = () => {
 
-  onst [num, setNum] = useState(0);
+  const [num, setNum] = useState(0);
 
   function randomNumberInRange(min, max) {
     //  randomizing the number
