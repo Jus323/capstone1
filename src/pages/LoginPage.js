@@ -1,8 +1,8 @@
-import React from 'react'
-import '../styles/LoginPage.css'
-import { Link as RouterLink } from 'react-router-dom'
+import React from 'react';
+import { Link as RouterLink } from 'react-router-dom';
+import '../styles/LoginPage.css';
 
-export const LoginPage = () => 
+export const LoginPage = () =>
   <div className="app">
     <div className="login-form">
       <h1>LOGIN</h1>
