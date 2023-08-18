@@ -1,12 +1,12 @@
-import React from 'react'
-import '../styles/LoginPage.css' // same style as for Loginpage
+import React from 'react';
+import '../styles/LoginPage.css'; // same style as for Loginpage
 
 export const RegisterPage = () => (
-  <div className="app">
+    <div className="app">
     <div className="login-form">
-      <h1>Reset Password</h1>
+        <h1>Reset Password</h1>
 
-      <form action='\'> 
+        <form action='\'>
         <div>
             <label for="email">Email</label>
             <input type="email" id="email"></input>
@@ -32,7 +32,7 @@ export const RegisterPage = () => (
             <input type="text" id="address"></input>
         </div>
         <div>
-            <label for="contact_number">contact Number</label>
+            <label for="contact_number">Contact Number</label>
             <input type="text" id="contact_number"></input>
         </div>
         <div>
