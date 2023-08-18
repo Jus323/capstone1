@@ -1,51 +1,160 @@
-import React from 'react';
-import '../styles/LoginPage.css'; // same style as for Loginpage
+import React, { useState } from "react";
+import { Link as RouterLink } from "react-router-dom";
 
-export const RegisterPage = () => (
+import "../styles/RegisterPage.css"; // same style as for Loginpage
+import { useAuth } from "../hooks/useAuth";
+
+export const RegisterPage = () => {
+  const { addUser, login } = useAuth();
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [user, setUser] = useState({
+    email: "",
+    password: "",
+    firstName: "",
+    lastName: "",
+    address: "",
+    contactNumber: "",
+    nric: "",
+    dateOfBirth: "",
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (confirmPassword === user.password) {
+      addUser(user).then((created) => {
+        if (created) {
+          login(user);
+        } else {
+          alert("User exists");
+        }
+      });
+    } else {
+      alert("passwords do not match");
+    }
+  };
+
+  const handleEmailChange = (e) => {
+    setUser({ ...user, email: e.target.value });
+  };
+  const handleFirstNameChange = (e) => {
+    setUser({ ...user, firstName: e.target.value });
+  };
+  const handleLastChange = (e) => {
+    setUser({ ...user, lastName: e.target.value });
+  };
+  const handlePasswordChange = (e) => {
+    setUser({ ...user, password: e.target.value });
+  };
+  const handleConfirmPasswordChange = (e) => {
+    setConfirmPassword(e.target.value);
+  };
+  const handleAddressChange = (e) => {
+    setUser({ ...user, address: e.target.value });
+  };
+  const handleContactNumberChange = (e) => {
+    setUser({ ...user, contactNumber: e.target.value });
+  };
+  const handleNricChange = (e) => {
+    setUser({ ...user, nric: e.target.value });
+  };
+  const handleDateOfBirthChange = (e) => {
+    setUser({ ...user, dateOfBirth: e.target.value });
+  };
+
+  return (
     <div className="app">
-    <div className="login-form">
+      <div className="login-form">
         <h1>Reset Password</h1>
 
-        <form action='\'>
-        <div>
-            <label for="email">Email</label>
-            <input type="email" id="email"></input>
-        </div>
-        <div>
-            <label for="pwd">Password</label>
-            <input type="password" id="pwd"></input>
-        </div>
-        <div>
-            <label for="confirm_pwd">Confirm Password</label>
-            <input type="password" id="confirm_pwd"></input>
-        </div>
-        <div>
-            <label for="first_name">First Name</label>
-            <input type="text" id="first_name"></input>
-        </div>
-        <div>
-        <label for="last_name">Last Name</label>
-            <input type="text" id="last_name"></input>
-        </div>
-        <div>
-            <label for="address">Address</label>
-            <input type="text" id="address"></input>
-        </div>
-        <div>
-            <label for="contact_number">Contact Number</label>
-            <input type="text" id="contact_number"></input>
-        </div>
-        <div>
-            <label for="nric">NRIC</label>
-            <input type="text" id="nric"></input>
-        </div>
-        <div>
-            <label for="birthday">Date of Birth</label>
-            <input type="date" id="birthday"></input>
-        </div>
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              value={user.email}
+              id="email"
+              onChange={handleEmailChange}
+            ></input>
+          </div>
+          <div>
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              value={user.password}
+              onChange={handlePasswordChange}
+              id="password"
+            ></input>
+          </div>
+          <div>
+            <label htmlFor="confirmPassword">Confirm Password</label>
+            <input
+              type="password"
+              value={user.confirmPassword}
+              onChange={handleConfirmPasswordChange}
+              id="confirmPassword"
+            ></input>
+          </div>
+          <div>
+            <label htmlFor="firstName">First Name</label>
+            <input
+              type="text"
+              value={user.firstName}
+              onChange={handleFirstNameChange}
+              id="firstName"
+            ></input>
+          </div>
+          <div>
+            <label htmlFor="lastName">Last Name</label>
+            <input
+              type="text"
+              value={user.lastName}
+              onChange={handleLastChange}
+              id="lastName"
+            ></input>
+          </div>
+          <div>
+            <label htmlFor="address">Address</label>
+            <input
+              type="text"
+              value={user.address}
+              onChange={handleAddressChange}
+              id="address"
+            ></input>
+          </div>
+          <div>
+            <label htmlFor="contactNumber">Contact Number</label>
+            <input
+              type="text"
+              value={user.contactNumber}
+              onChange={handleContactNumberChange}
+              id="contactNumber"
+            ></input>
+          </div>
+          <div>
+            <label htmlFor="nric">NRIC</label>
+            <input
+              type="text"
+              value={user.nric}
+              onChange={handleNricChange}
+              id="nric"
+            ></input>
+          </div>
+          <div>
+            <label htmlFor="dateOfBirth">Date of Birth</label>
+            <input
+              type="date"
+              value={user.dateOfBirth}
+              onChange={handleDateOfBirthChange}
+              id="dateOfBirth"
+            ></input>
+          </div>
 
-        <input type='submit' class="submit_type" value="Register"></input>
-      </form>
+          <RouterLink to="/">
+            <button className="secondary">Back</button>
+          </RouterLink>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
     </div>
-  </div>
-);
+  );
+};
