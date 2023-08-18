@@ -7,7 +7,7 @@ export const ProfileEditPage = () => {
     const navigate = useNavigate()
 
     const handleupdateclick = () => {navigate("/home")}
-    const handlecancleclick = () => {navigate("/register")}
+    const handlecancleclick = () => {navigate("/home")}
 
     return(
         <div className="app">
@@ -41,7 +41,7 @@ export const ProfileEditPage = () => {
             </div>
 
             <button onClick={handleupdateclick}>Update</button>
-            <button onClick={handlecancleclick}>Cancle</button>
+            <button onClick={handlecancleclick}>Cancel</button>
         </form>
         </div>
     </div>)
