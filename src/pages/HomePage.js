@@ -20,7 +20,7 @@ export const HomePage = () => {
       <div>
           <div>
             <h1>Account Balance: ${num}</h1>
-            <Button varaint="warning" onClick={handleClick}>Click to Show Account Balance</Button>{' '}
+            <Button variant="warning" onClick={handleClick}>Click to Show Account Balance</Button>{' '}
           </div>
           
         <Button variant="dark" > Deposit </Button>{' '}
