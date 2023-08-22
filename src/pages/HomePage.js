@@ -34,7 +34,7 @@ export const HomePage = () => {
               <Link to="/profileedit" className="nav-link">
                 Edit Profile
               </Link>
-              <button onClick={logout} className="nav-link">
+              <button onClick={logout} className="nav-link logout-button">
                 Logout
               </button>
             </Nav>
