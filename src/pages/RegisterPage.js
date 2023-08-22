@@ -67,8 +67,14 @@ export const RegisterPage = () => {
       alert("Password too short!");
       return false;
     }
-    if (!user.password.match(/[A-Z]/g)) {
-      alert("Include at least 1 uppercase!");
+    if (
+      !user.password.match(
+        /(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()])[A-Za-z\d@$#!%*?&]{8,}$/,
+      )
+    ) {
+      alert(
+        "Password must contain at least one lowercase letter, one uppercase letter, one digit, one special character, and be at least 8 characters long ",
+      );
       return false;
     }
 
@@ -82,6 +88,31 @@ export const RegisterPage = () => {
       alert("Please enter a valid birthday!");
       return false;
     }
+
+    //first name
+    if (user.firstName !== "") {
+      if (!user.firstName.match(/^[A-Za-z]+$/)) {
+        alert("Numbers and special characters are not allowed");
+        return false;
+      }
+    }
+
+    //last name
+    if (user.firstName !== "") {
+      if (!user.lastName.match(/^[A-Za-z]+$/)) {
+        alert("Numbers and special characters are not allowed");
+        return false;
+      }
+    }
+
+    //phone number
+    if (user.firstName !== "") {
+      if (!user.contactNumber.match(/^[0-9]+$/)) {
+        alert("Only numbers are allowed");
+        return false;
+      }
+    }
+
     const currentDate = new Date();
     const birthday = new Date(user.dateOfBirth);
     var timsedifference =
@@ -167,9 +198,18 @@ export const RegisterPage = () => {
               value={user.password}
               onChange={handlePasswordChange}
               id="password"
-              placeholder="Password* (Min. 4 digit & 1 uppercase)"
+              placeholder="Password*"
               required
             ></input>
+            <tag>
+              <div
+                style={{ fontSize: "10px", color: "red", textAlign: "left" }}
+              >
+                * Password must contain at least one lowercase letter, one
+                uppercase letter, one digit, one special character, and be at
+                least 8 characters long
+              </div>
+            </tag>
           </div>
           <div>
             <input
