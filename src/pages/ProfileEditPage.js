@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import "../styles/LoginPage.css"; // same style as for Loginpage
+import RegisterPage from "./RegisterPage";
 
 export const ProfileEditPage = () => {
   const { editProfile } = useAuth();
@@ -14,15 +15,74 @@ export const ProfileEditPage = () => {
     dateOfBirth: "",
   });
 
+  // input check
+  function requirement_check() {
+    // password
+    if (confirmPassword !== user.password) {
+      alert("Passwords do not match!");
+      return false;
+    }
+    if (user.password.length <= 4) {
+      alert("Password too short!");
+      return false;
+    }
+    if (
+      !user.password.match(
+        /(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()])[A-Za-z\d@$#!%*?&]{8,}$/
+      )
+    ) {
+      alert(
+        "Password must contain at least one lowercase letter, one uppercase letter, one digit, one special character, and be at least 8 characters long "
+      );
+      return false;
+    }
+
+    // invalid nric check
+    if (user.nric.length < 4) {
+      alert("Please enter a valid NRIC number!");
+      return false;
+    }
+    // adult for registration
+    if (!user.dateOfBirth) {
+      alert("Please enter a valid birthday!");
+      return false;
+    }
+
+    //first name
+    if (user.firstName !== "") {
+      if (!user.firstName.match(/^[A-Za-z]+$/)) {
+        alert("Numbers and special characters are not allowed");
+        return false;
+      }
+    }
+
+    //last name
+    if (user.firstName !== "") {
+      if (!user.lastName.match(/^[A-Za-z]+$/)) {
+        alert("Numbers and special characters are not allowed");
+        return false;
+      }
+    }
+
+    //phone number
+    if (user.firstName !== "") {
+      if (!user.contactNumber.match(/^[0-9]+$/)) {
+        alert("Only numbers are allowed");
+        return false;
+      }
+    }
+
   const navigate = useNavigate();
 
   const handleupdateclick = (e) => {
     e.preventDefault();
+
+    if (requirement_check()) {
     editProfile(user).then((success) => {
       if (!success) {
         alert("Please check your inputs! :(");
       }
-    });
+    })};
 
     navigate("/home");
   };
@@ -115,4 +175,4 @@ export const ProfileEditPage = () => {
       </div>
     </div>
   );
-};
+}};
