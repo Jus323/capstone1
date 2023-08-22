@@ -18,3 +18,52 @@
   background-color: #0056b3; /* Change background color on hover */
   color: rgb(238, 48, 48); /* Change text color on hover */
 }
+
+.container {
+  display: flex;
+  width: 100%;
+}
+
+.company_title {
+  flex: 1; /* Take up remaining space */
+  display: flex; /* Enable flex properties */
+  align-items: center; /* Vertically center the content */
+  color: black;
+}
+
+.content {
+  width: 80%;
+  padding: 20px;
+  background-color: white;
+}
+.dashboard-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dashboard-content {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-section {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.latest_transactions {
+  flex: 1;
+  padding: 10px;
+}
+
+.Pie_chart {
+  flex: 1;
+  padding: 10px;
+  width: 10%;
+}
+
+.message {
+  margin-top: 20px;
+}

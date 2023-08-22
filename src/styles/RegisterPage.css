@@ -81,3 +81,21 @@ button.secondary {
 button.secondary:hover {
   background: #f2f2f2;
 }
+
+h5 {
+  text-align: left;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.weak_id {
+  color: red;
+}
+
+.moderate_id {
+  color: orange;
+}
+
+.strong_id {
+  color: green;
+}

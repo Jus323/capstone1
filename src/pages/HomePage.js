@@ -1,57 +1,75 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import { Link } from "react-router-dom";
-import Container from "react-bootstrap/Container";
+import Logo from "../img/logo.jpg";
 import "../styles/HomePage.css";
 import { useAuth } from "../hooks/useAuth";
+import { LatestTransactions } from "./LatestTransactions";
+import { PieChart } from "./PieChart";
 
 export const HomePage = () => {
+  const [mask, setMask] = useState(true);
   const [num, setNum] = useState(0);
-  const { logout } = useAuth();
+  const { logout, user } = useAuth();
 
   function randomNumberInRange(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
-  const handleClick = () => {
-    setNum(randomNumberInRange(1, 1000000));
-  };
+  useEffect(() => setNum(randomNumberInRange(1, 1000000)), []);
 
   return (
-    <div>
-      {/* Navigation Bar */}
-      <Navbar bg="primary" expand="lg">
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="ml-auto nav-links">
-            <Link to="/home" className="nav-link">
-              Home
-            </Link>
-            <Link to="/profileedit" className="nav-link">
-              Edit Profile
-            </Link>
-            <button onClick={logout} className="nav-link">
-              Logout
-            </button>
-          </Nav>
-        </Navbar.Collapse>
-      </Navbar>
-
+    <div className="container">
       {/* Page Content */}
-      <Container style={{ marginTop: "20px" }}>
-        <h1>Welcome Home, User</h1>
+      <div className="navbar">
+        {/* Navigation Bar */}
+        <Navbar bg="primary" expand="lg">
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="ml-auto nav-links">
+              <Link to="/home" className="nav-link">
+                Home
+              </Link>
+              <Link to="/profileedit" className="nav-link">
+                Edit Profile
+              </Link>
+              <button onClick={logout} className="nav-link">
+                Logout
+              </button>
+            </Nav>
+          </Navbar.Collapse>
+        </Navbar>
+
+        <p className="company_title">
+          <img src={Logo} alt="Company Logo" />
+          <h1>Yew Ohh Bee</h1>
+        </p>
         <div>
-          <div>
-            <h1>Account Balance: ${num}</h1>
-            <Button variant="warning" onClick={handleClick}>
-              Click to Show Account Balance
-            </Button>{" "}
-          </div>
-          <Button variant="dark">Deposit</Button>{" "}
-          <Button variant="dark">Withdraw</Button>{" "}
+          <h1>Account Balance: {mask ? " ******" : `$${num}`}</h1>
+          <Button variant="warning" onClick={() => setMask(!mask)}>
+            Show Account Balance
+          </Button>
         </div>
-      </Container>
+
+        <Button variant="dark">Deposit</Button>
+        <Button variant="dark">Withdraw</Button>
+      </div>
+      <div className="content">
+        <h2>Welcome Home, {user.firstName}</h2>
+        <div className="dashboard-container">
+          <div className="dashboard-content">
+            <div className="dashboard-section">
+              <div className="latest_transactions">
+                <LatestTransactions />
+              </div>
+              <div className="Pie_chart">
+                <PieChart />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
