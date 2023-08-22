@@ -19,20 +19,59 @@ export const RegisterPage = () => {
     dateOfBirth: "",
   });
 
+  // input check
+  function requirement_check() {
+    // password
+    if (confirmPassword !== user.password) {
+      alert("Passwords do not match!");
+      return false;
+    }
+    if (user.password.length <= 4) {
+      alert("Password too short!");
+      return false;
+    }
+    if (!user.password.match(/[A-Z]/g)) {
+      alert("Include at least 1 uppercase!");
+      return false;
+    }
+
+    // invalid nric check
+    if (user.nric.length < 4) {
+      alert("Please enter a valid NRIC number!");
+      return false;
+    }
+    // adult for registration
+    if (!user.dateOfBirth) {
+      alert("Please enter a valid birthday!");
+      return false;
+    }
+    const currentDate = new Date();
+    const birthday = new Date(user.dateOfBirth);
+    var timsedifference =
+      (currentDate - birthday) / (1000 * 60 * 60 * 24 * 365);
+    console.log("this is timediff", timsedifference);
+    if (timsedifference < 18) {
+      alert("No kids, this is an adult webpage!");
+      return false;
+    }
+
+    return true;
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (confirmPassword === user.password) {
+
+    if (requirement_check()) {
       addUser(user).then((created) => {
         if (created) {
-          alert("User created");
-          login(user)
-          navigate("/login");
+          login(user);
+          alert("User created!");
+          login(user);
+          navigate("/");
         } else {
-          alert("User exists");
+          alert("User NRIC exists");
         }
       });
-    } else {
-      alert("passwords do not match");
     }
   };
 
@@ -68,6 +107,7 @@ export const RegisterPage = () => {
     <div className="app">
       <div className="login-form">
         <h1>Register Account</h1>
+        <h5>*: Required Fields</h5>
 
         <form onSubmit={handleSubmit}>
           <div>
@@ -76,7 +116,7 @@ export const RegisterPage = () => {
               value={user.email}
               id="email"
               onChange={handleEmailChange}
-              placeholder="Email"
+              placeholder="Email*"
               required
             ></input>
           </div>
@@ -86,7 +126,7 @@ export const RegisterPage = () => {
               value={user.password}
               onChange={handlePasswordChange}
               id="password"
-              placeholder="Password"
+              placeholder="Password* (Min. 4 digit & 1 uppercase)"
               required
             ></input>
           </div>
@@ -96,7 +136,7 @@ export const RegisterPage = () => {
               value={user.confirmPassword}
               onChange={handleConfirmPasswordChange}
               id="confirmPassword"
-              placeholder="Confirm Password"
+              placeholder="Confirm Password*"
               required
             ></input>
           </div>
@@ -142,12 +182,12 @@ export const RegisterPage = () => {
               value={user.nric}
               onChange={handleNricChange}
               id="nric"
-              placeholder="NRIC (optional)"
+              placeholder="NRIC* (at least 4 digit)"
             ></input>
           </div>
           <div>
             <input
-              placeholder="Date of Birth (optional)"
+              placeholder="Date of Birth* (More than 18 year-old)"
               value={user.dateOfBirth}
               onChange={handleDateOfBirthChange}
               id="dateOfBirth"
