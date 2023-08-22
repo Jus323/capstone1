@@ -69,11 +69,11 @@ export const RegisterPage = () => {
     }
     if (
       !user.password.match(
-        /(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()])[A-Za-z\d@$#!%*?&]{8,}$/
+        /(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()])[A-Za-z\d@$#!%*?&]{8,}$/,
       )
     ) {
       alert(
-        "Password must contain at least one lowercase letter, one uppercase letter, one digit, one special character, and be at least 8 characters long "
+        "Password must contain at least one lowercase letter, one uppercase letter, one digit, one special character, and be at least 8 characters long ",
       );
       return false;
     }
