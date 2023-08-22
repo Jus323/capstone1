@@ -66,41 +66,41 @@ export const AuthProvider = ({ children }) => {
   //use this to edit profile
   const editProfile = useCallback(
     async (data) => {
-      const loggedInUser = users.find(
-        (user1) => user1.email === user.email
-      )
-      
+      const loggedInUser = users.find((user1) => user1.email === user.email);
+
       if (loggedInUser) {
-      setUsers(
-        users.filter((user) => user.email !== loggedInUser.email)
-        .concat([{
-          ...loggedInUser,
+        setUsers(
+          users
+            .filter((user) => user.email !== loggedInUser.email)
+            .concat([
+              {
+                ...loggedInUser,
+                firstName: data.firstName,
+                lastName: data.lastName,
+                address: data.address,
+                contactNumber: data.contactNumber,
+                nric: data.nric,
+                dateOfBirth: data.dateOfBirth,
+              },
+            ]),
+        );
+        setUser({
+          ...user,
           firstName: data.firstName,
           lastName: data.lastName,
           address: data.address,
           contactNumber: data.contactNumber,
           nric: data.nric,
-          dateOfBirth: data.dateOfBirth
-        }])
-      );
-      setUser({...user,
-        firstName: data.firstName,
-        lastName: data.lastName,
-        address: data.address,
-        contactNumber: data.contactNumber,
-        nric: data.nric,
-        dateOfBirth: data.dateOfBirth});
-      navigate("/");
-      return true;
-    } else {
-      return false;
-    }
-  },
-  [navigate, setUsers, user, users],
+          dateOfBirth: data.dateOfBirth,
+        });
+        navigate("/");
+        return true;
+      } else {
+        return false;
+      }
+    },
+    [navigate, setUsers, user, users],
   );
-
-  
-  
 
   const value = useMemo(
     () => ({
@@ -109,7 +109,7 @@ export const AuthProvider = ({ children }) => {
       logout,
       addUser,
       resetPassword,
-      editProfile
+      editProfile,
     }),
     [user, login, logout, addUser, resetPassword, editProfile],
   );
