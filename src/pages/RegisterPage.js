@@ -64,9 +64,7 @@ export const RegisterPage = () => {
     if (requirement_check()) {
       addUser(user).then((created) => {
         if (created) {
-          login(user);
           alert("User created!");
-          login(user);
           navigate("/");
         } else {
           alert("User NRIC exists");
