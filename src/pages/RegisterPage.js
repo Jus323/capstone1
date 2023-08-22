@@ -6,7 +6,7 @@ import { useAuth } from "../hooks/useAuth";
 
 export const RegisterPage = () => {
   const navigate = useNavigate();
-  const { addUser, login } = useAuth();
+  const { addUser } = useAuth();
   const [confirmPassword, setConfirmPassword] = useState("");
   const [user, setUser] = useState({
     email: "",
@@ -18,6 +18,43 @@ export const RegisterPage = () => {
     nric: "",
     dateOfBirth: "",
   });
+
+  const [pwd_strength, setStrength] = useState("");
+  const [strength_colorid, setStrengthcolorid] = useState("");
+
+  const checkPasswordStrength = (password) => {
+    // Define your criteria for password strength here
+    const lowercaseRegex = /[a-z]/;
+    const uppercaseRegex = /[A-Z]/;
+    const digitRegex = /[0-9]/;
+    const specialCharRegex = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\-]/;
+
+    let score = 0;
+
+    if (lowercaseRegex.test(password)) {
+      score++;
+    }
+    if (uppercaseRegex.test(password)) {
+      score++;
+    }
+    if (digitRegex.test(password)) {
+      score++;
+    }
+    if (specialCharRegex.test(password)) {
+      score++;
+    }
+
+    if (password.length >= 8 && score >= 3) {
+      setStrength("Strong");
+      setStrengthcolorid("strong_id");
+    } else if (password.length >= 6 && score >= 2) {
+      setStrength("Moderate");
+      setStrengthcolorid("moderate_id");
+    } else {
+      setStrength("Weak");
+      setStrengthcolorid("weak_id");
+    }
+  };
 
   // input check
   function requirement_check() {
@@ -115,6 +152,7 @@ export const RegisterPage = () => {
   };
   const handlePasswordChange = (e) => {
     setUser({ ...user, password: e.target.value });
+    checkPasswordStrength(user.password);
   };
   const handleConfirmPasswordChange = (e) => {
     setConfirmPassword(e.target.value);
@@ -136,7 +174,7 @@ export const RegisterPage = () => {
     <div className="app">
       <div className="login-form">
         <h1>Register Account</h1>
-        <h5>*: Required Fields</h5>
+        <h4>*: Required Fields</h4>
 
         <form onSubmit={handleSubmit}>
           <div>
@@ -150,6 +188,11 @@ export const RegisterPage = () => {
             ></input>
           </div>
           <div>
+            <h5>
+              Strength Check:{" "}
+              <span className={strength_colorid}>{pwd_strength}</span>
+            </h5>
+
             <input
               type="password"
               value={user.password}
