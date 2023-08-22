@@ -5,9 +5,12 @@ import Nav from "react-bootstrap/Nav";
 import { Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import "../styles/HomePage.css";
+import { useAuth } from "../hooks/useAuth";
+
 
 export const HomePage = () => {
   const [num, setNum] = useState(0);
+  const { logout } = useAuth();
 
   function randomNumberInRange(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -29,9 +32,9 @@ export const HomePage = () => {
             <Link to="/profileedit" className="nav-link">
               Edit Profile
             </Link>
-            <Link to="/" className="nav-link">
+            <button onClick={logout} className="nav-link">
               Logout
-            </Link>
+            </button>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
