@@ -124,7 +124,7 @@ export const RegisterPage = () => {
               value={user.password}
               onChange={handlePasswordChange}
               id="password"
-              placeholder="Password* (Min. 4 digit & 1 uppercase)"
+              placeholder="Password* (Min. 4 digit & 1 uppercase) test"
               required
             ></input>
           </div>
