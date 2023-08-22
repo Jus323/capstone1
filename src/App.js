@@ -6,6 +6,7 @@ import { ForgotPasswordPage } from './pages/ForgotPasswordPage'
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import './App.css';
 import { AuthProvider } from './hooks/useAuth';
+import { ProfileEditPage } from './pages/ProfileEditPage'
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/forgotpassword" element={<ForgotPasswordPage />} />
+          <Route path="/profileedit" element={<ProfileEditPage />} />
           <Route
             path="/home"
             element={
