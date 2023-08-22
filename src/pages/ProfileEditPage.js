@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import "../styles/LoginPage.css"; // same style as for Loginpage
 
-
 export const ProfileEditPage = () => {
   const { editProfile } = useAuth();
   const [user, setUser] = useState({
@@ -24,8 +23,7 @@ export const ProfileEditPage = () => {
         alert("Please check your inputs! :(");
       }
     });
-    
-    
+
     navigate("/home");
   };
   const handlecancelclick = () => {
@@ -55,7 +53,7 @@ export const ProfileEditPage = () => {
       <div className="login-form">
         <h1>Manage Your Profile</h1>
 
-          <form onSubmit={handleupdateclick}>
+        <form onSubmit={handleupdateclick}>
           <div>
             <label htmlFor="firstName">First Name</label>
             <input
@@ -110,7 +108,7 @@ export const ProfileEditPage = () => {
               id="dateOfBirth"
             ></input>
           </div>
-          
+
           <button onClick={handleupdateclick}>Update</button>
           <button onClick={handlecancelclick}>Cancel</button>
         </form>

@@ -1,21 +1,20 @@
 .nav-links {
-    display: flex;
-    gap: 15px;
-    padding: 10px; 
-    background-color: rgb(41, 41, 168);
-    justify-content: flex-end; 
-  }
+  display: flex;
+  gap: 15px;
+  padding: 10px;
+  background-color: rgb(41, 41, 168);
+  justify-content: flex-end;
+}
 
-  .navbar .nav-links a {
-    color: white;
-    text-decoration: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .navbar .nav-links a:hover {
-    background-color: #0056b3; /* Change background color on hover */
-    color: rgb(238, 48, 48); /* Change text color on hover */
-  }
-  
+.navbar .nav-links a {
+  color: white;
+  text-decoration: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.navbar .nav-links a:hover {
+  background-color: #0056b3; /* Change background color on hover */
+  color: rgb(238, 48, 48); /* Change text color on hover */
+}

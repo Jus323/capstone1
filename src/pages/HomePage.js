@@ -7,7 +7,6 @@ import Container from "react-bootstrap/Container";
 import "../styles/HomePage.css";
 import { useAuth } from "../hooks/useAuth";
 
-
 export const HomePage = () => {
   const [num, setNum] = useState(0);
   const { logout } = useAuth();
