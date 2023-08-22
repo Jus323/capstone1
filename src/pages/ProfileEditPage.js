@@ -58,11 +58,12 @@ export const ProfileEditPage = () => {
     e.preventDefault();
 
     if (requirement_check()) {
-    editProfile(user).then((success) => {
-      if (!success) {
-        alert("Please check your inputs! :(");
-      }
-    })};
+      editProfile(user).then((success) => {
+        if (!success) {
+          alert("Please check your inputs! :(");
+        }
+      });
+    }
 
     navigate("/home");
   };
@@ -101,7 +102,6 @@ export const ProfileEditPage = () => {
               onChange={handleFirstNameChange}
               id="firstName"
               placeholder="First name (Optional)"
-
             ></input>
           </div>
           <div>
