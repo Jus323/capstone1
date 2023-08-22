@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { Link as RouterLink } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import "../styles/RegisterPage.css"; // same style as for Loginpage
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
+import "../styles/RegisterPage.css"; // same style as for Loginpage
 
 export const RegisterPage = () => {
   const navigate = useNavigate();
@@ -80,35 +79,35 @@ export const RegisterPage = () => {
 
     // invalid nric check
     if (user.nric.length < 4) {
-      alert("Please enter a valid NRIC number!");
+      alert("Nric: Please enter a valid NRIC number!");
       return false;
     }
     // adult for registration
     if (!user.dateOfBirth) {
-      alert("Please enter a valid birthday!");
+      alert("Birthday: Please enter a valid birthday!");
       return false;
     }
 
     //first name
     if (user.firstName !== "") {
       if (!user.firstName.match(/^[A-Za-z]+$/)) {
-        alert("Numbers and special characters are not allowed");
+        alert("First Name: Numbers and special characters are not allowed");
         return false;
       }
     }
 
     //last name
-    if (user.firstName !== "") {
+    if (user.lastName !== "") {
       if (!user.lastName.match(/^[A-Za-z]+$/)) {
-        alert("Numbers and special characters are not allowed");
+        alert("Last Name: Numbers and special characters are not allowed");
         return false;
       }
     }
 
     //phone number
-    if (user.firstName !== "") {
+    if (user.contactNumber !== "") {
       if (!user.contactNumber.match(/^[0-9]+$/)) {
-        alert("Only numbers are allowed");
+        alert("Contact Number: Only numbers are allowed");
         return false;
       }
     }

@@ -10,43 +10,37 @@ export const ProfileEditPage = () => {
     lastName: "",
     address: "",
     contactNumber: "",
-    nric: "",
     dateOfBirth: "",
   });
 
   // input check
   function requirement_check() {
-    // invalid nric check
-    if (user.nric.length < 4) {
-      alert("Please enter a valid NRIC number!");
-      return false;
-    }
     // adult for registration
     if (!user.dateOfBirth) {
-      alert("Please enter a valid birthday!");
+      alert("Birthday: Please enter a valid birthday!");
       return false;
     }
 
     //first name
     if (user.firstName !== "") {
       if (!user.firstName.match(/^[A-Za-z]+$/)) {
-        alert("Numbers and special characters are not allowed");
+        alert("First name: Numbers and special characters are not allowed");
         return false;
       }
     }
 
     //last name
-    if (user.firstName !== "") {
+    if (user.lastName !== "") {
       if (!user.lastName.match(/^[A-Za-z]+$/)) {
-        alert("Numbers and special characters are not allowed");
+        alert("Last name: Numbers and special characters are not allowed");
         return false;
       }
     }
 
     //phone number
-    if (user.firstName !== "") {
+    if (user.contactNumber !== "") {
       if (!user.contactNumber.match(/^[0-9]+$/)) {
-        alert("Only numbers are allowed");
+        alert("Contact number: Only numbers are allowed");
         return false;
       }
     }
@@ -81,9 +75,6 @@ export const ProfileEditPage = () => {
   };
   const handleContactNumberChange = (e) => {
     setUser({ ...user, contactNumber: e.target.value });
-  };
-  const handleNricChange = (e) => {
-    setUser({ ...user, nric: e.target.value });
   };
   const handleDateOfBirthChange = (e) => {
     setUser({ ...user, dateOfBirth: e.target.value });
@@ -129,15 +120,6 @@ export const ProfileEditPage = () => {
               onChange={handleContactNumberChange}
               id="contactNumber"
               placeholder="Contact Number (Optional)"
-            ></input>
-          </div>
-          <div>
-            <input
-              type="text"
-              value={user.nric}
-              onChange={handleNricChange}
-              id="nric"
-              placeholder="NRIC* (at least 4 digit)"
             ></input>
           </div>
           <div>
