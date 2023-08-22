@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import "../styles/LoginPage.css"; // same style as for Loginpage
-import RegisterPage from "./RegisterPage";
 
 export const ProfileEditPage = () => {
   const { editProfile } = useAuth();
@@ -17,26 +16,6 @@ export const ProfileEditPage = () => {
 
   // input check
   function requirement_check() {
-    // password
-    if (confirmPassword !== user.password) {
-      alert("Passwords do not match!");
-      return false;
-    }
-    if (user.password.length <= 4) {
-      alert("Password too short!");
-      return false;
-    }
-    if (
-      !user.password.match(
-        /(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()])[A-Za-z\d@$#!%*?&]{8,}$/
-      )
-    ) {
-      alert(
-        "Password must contain at least one lowercase letter, one uppercase letter, one digit, one special character, and be at least 8 characters long "
-      );
-      return false;
-    }
-
     // invalid nric check
     if (user.nric.length < 4) {
       alert("Please enter a valid NRIC number!");
@@ -71,6 +50,7 @@ export const ProfileEditPage = () => {
         return false;
       }
     }
+  }
 
   const navigate = useNavigate();
 
@@ -115,52 +95,52 @@ export const ProfileEditPage = () => {
 
         <form onSubmit={handleupdateclick}>
           <div>
-            <label htmlFor="firstName">First Name</label>
             <input
               type="text"
               value={user.firstName}
               onChange={handleFirstNameChange}
               id="firstName"
+              placeholder="First name (Optional)"
+
             ></input>
           </div>
           <div>
-            <label htmlFor="lastName">Last Name</label>
             <input
               type="text"
               value={user.lastName}
               onChange={handleLastNameChange}
               id="lastName"
+              placeholder="Last name (Optional)"
             ></input>
           </div>
           <div>
-            <label htmlFor="address">Address</label>
             <input
               type="text"
               value={user.address}
               onChange={handleAddressChange}
               id="address"
+              placeholder="Address (Optional)"
             ></input>
           </div>
           <div>
-            <label htmlFor="contactNumber">Contact Number</label>
             <input
               type="text"
               value={user.contactNumber}
               onChange={handleContactNumberChange}
               id="contactNumber"
+              placeholder="Contact Number (Optional)"
             ></input>
           </div>
           <div>
-            <label htmlFor="nric">NRIC</label>
             <input
               type="text"
               value={user.nric}
               onChange={handleNricChange}
               id="nric"
+              placeholder="NRIC* (at least 4 digit)"
             ></input>
           </div>
           <div>
-            <label htmlFor="dateOfBirth">Date of Birth</label>
             <input
               type="date"
               value={user.dateOfBirth}
@@ -175,4 +155,4 @@ export const ProfileEditPage = () => {
       </div>
     </div>
   );
-}};
+};
