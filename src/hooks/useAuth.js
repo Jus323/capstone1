@@ -99,7 +99,7 @@ export const AuthProvider = ({ children }) => {
         return false;
       }
     },
-    [navigate, setUsers, user, users],
+    [navigate, setUser, setUsers, user, users],
   );
 
   const value = useMemo(
