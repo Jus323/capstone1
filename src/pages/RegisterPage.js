@@ -1,51 +1,205 @@
-import React from 'react';
-import '../styles/LoginPage.css'; // same style as for Loginpage
+import React, { useState } from "react";
+import { Link as RouterLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import "../styles/RegisterPage.css"; // same style as for Loginpage
+import { useAuth } from "../hooks/useAuth";
 
-export const RegisterPage = () => (
+export const RegisterPage = () => {
+  const navigate = useNavigate();
+  const { addUser, login } = useAuth();
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [user, setUser] = useState({
+    email: "",
+    password: "",
+    firstName: "",
+    lastName: "",
+    address: "",
+    contactNumber: "",
+    nric: "",
+    dateOfBirth: "",
+  });
+
+  // input check
+  function requirement_check() {
+    // password
+    if (confirmPassword !== user.password) {
+      alert("Passwords do not match!");
+      return false;
+    }
+    if (user.password.length <= 4) {
+      alert("Password too short!");
+      return false;
+    }
+    if (!user.password.match(/[A-Z]/g)) {
+      alert("Include at least 1 uppercase!");
+      return false;
+    }
+
+    // invalid nric check
+    if (user.nric.length < 4) {
+      alert("Please enter a valid NRIC number!");
+      return false;
+    }
+    // adult for registration
+    if (!user.dateOfBirth) {
+      alert("Please enter a valid birthday!");
+      return false;
+    }
+    const currentDate = new Date();
+    const birthday = new Date(user.dateOfBirth);
+    var timsedifference =
+      (currentDate - birthday) / (1000 * 60 * 60 * 24 * 365);
+    console.log("this is timediff", timsedifference);
+    if (timsedifference < 18) {
+      alert("No kids, this is an adult webpage!");
+      return false;
+    }
+
+    return true;
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (requirement_check()) {
+      addUser(user).then((created) => {
+        if (created) {
+          alert("User created!");
+          navigate("/");
+        } else {
+          alert("User NRIC exists");
+        }
+      });
+    }
+  };
+
+  const handleEmailChange = (e) => {
+    setUser({ ...user, email: e.target.value });
+  };
+  const handleFirstNameChange = (e) => {
+    setUser({ ...user, firstName: e.target.value });
+  };
+  const handleLastChange = (e) => {
+    setUser({ ...user, lastName: e.target.value });
+  };
+  const handlePasswordChange = (e) => {
+    setUser({ ...user, password: e.target.value });
+  };
+  const handleConfirmPasswordChange = (e) => {
+    setConfirmPassword(e.target.value);
+  };
+  const handleAddressChange = (e) => {
+    setUser({ ...user, address: e.target.value });
+  };
+  const handleContactNumberChange = (e) => {
+    setUser({ ...user, contactNumber: e.target.value });
+  };
+  const handleNricChange = (e) => {
+    setUser({ ...user, nric: e.target.value });
+  };
+  const handleDateOfBirthChange = (e) => {
+    setUser({ ...user, dateOfBirth: e.target.value });
+  };
+
+  return (
     <div className="app">
-    <div className="login-form">
-        <h1>Reset Password</h1>
+      <div className="login-form">
+        <h1>Register Account</h1>
+        <h5>*: Required Fields</h5>
 
-        <form action='\'>
-        <div>
-            <label for="email">Email</label>
-            <input type="email" id="email"></input>
-        </div>
-        <div>
-            <label for="pwd">Password</label>
-            <input type="password" id="pwd"></input>
-        </div>
-        <div>
-            <label for="confirm_pwd">Confirm Password</label>
-            <input type="password" id="confirm_pwd"></input>
-        </div>
-        <div>
-            <label for="first_name">First Name</label>
-            <input type="text" id="first_name"></input>
-        </div>
-        <div>
-        <label for="last_name">Last Name</label>
-            <input type="text" id="last_name"></input>
-        </div>
-        <div>
-            <label for="address">Address</label>
-            <input type="text" id="address"></input>
-        </div>
-        <div>
-            <label for="contact_number">Contact Number</label>
-            <input type="text" id="contact_number"></input>
-        </div>
-        <div>
-            <label for="nric">NRIC</label>
-            <input type="text" id="nric"></input>
-        </div>
-        <div>
-            <label for="birthday">Date of Birth</label>
-            <input type="date" id="birthday"></input>
-        </div>
+        <form onSubmit={handleSubmit}>
+          <div>
+            <input
+              type="email"
+              value={user.email}
+              id="email"
+              onChange={handleEmailChange}
+              placeholder="Email*"
+              required
+            ></input>
+          </div>
+          <div>
+            <input
+              type="password"
+              value={user.password}
+              onChange={handlePasswordChange}
+              id="password"
+              placeholder="Password* (Min. 4 digit & 1 uppercase)"
+              required
+            ></input>
+          </div>
+          <div>
+            <input
+              type="password"
+              value={user.confirmPassword}
+              onChange={handleConfirmPasswordChange}
+              id="confirmPassword"
+              placeholder="Confirm Password*"
+              required
+            ></input>
+          </div>
+          <div>
+            <input
+              type="text"
+              value={user.firstName}
+              onChange={handleFirstNameChange}
+              id="firstName"
+              placeholder="First Name (optional)"
+            ></input>
+          </div>
+          <div>
+            <input
+              type="text"
+              value={user.lastName}
+              onChange={handleLastChange}
+              id="lastName"
+              placeholder="Last Name (optional)"
+            ></input>
+          </div>
+          <div>
+            <input
+              type="text"
+              value={user.address}
+              onChange={handleAddressChange}
+              id="address"
+              placeholder="Address (optional)"
+            ></input>
+          </div>
+          <div>
+            <input
+              type="text"
+              value={user.contactNumber}
+              onChange={handleContactNumberChange}
+              id="contactNumber"
+              placeholder="Contact Number (optional)"
+            ></input>
+          </div>
+          <div>
+            <input
+              type="text"
+              value={user.nric}
+              onChange={handleNricChange}
+              id="nric"
+              placeholder="NRIC* (at least 4 digit)"
+            ></input>
+          </div>
+          <div>
+            <input
+              placeholder="Date of Birth* (More than 18 year-old)"
+              value={user.dateOfBirth}
+              onChange={handleDateOfBirthChange}
+              id="dateOfBirth"
+              onFocus={(e) => (e.target.type = "date")}
+              onBlur={(e) => (e.target.type = "text")}
+            ></input>
+          </div>
 
-        <input type='submit' class="submit_type" value="Register"></input>
-      </form>
+          <button type="submit">Submit</button>
+          <RouterLink to="/">
+            <button className="secondary">Back</button>
+          </RouterLink>
+        </form>
+      </div>
     </div>
-  </div>
-);
+  );
+};

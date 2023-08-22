@@ -49,6 +49,7 @@ button {
   width: 100%;
   border: 0;
   padding: 15px;
+  margin: 10px 0;
   color: #ffffff;
   font-size: 14px;
   border-radius: 15px;
@@ -58,31 +59,25 @@ button {
 }
 
 button:hover {
-  background: #40116d;
+  background: #635abb;
 }
 
-.message {
-  margin: 15px 0 0;
-  color: #b3b3b3;
-  font-size: 12px;
-}
-
-.message a {
-  color: #3324be;
-  text-decoration: none;
-}
-
-.submit_type {
+button.secondary {
   text-transform: uppercase;
   outline: 0;
-  background: #3324be;
+  background: #ffffff;
   width: 100%;
-  border: 0;
+  border: 2px solid #3324be;
   padding: 15px;
-  color: #ffffff;
+  margin: 10px 0;
+  color: #3324be;
   font-size: 14px;
   border-radius: 15px;
   -webkit-transition: all 0.3 ease;
   transition: all 0.3 ease;
   cursor: pointer;
+}
+
+button.secondary:hover {
+  background: #f2f2f2;
 }
