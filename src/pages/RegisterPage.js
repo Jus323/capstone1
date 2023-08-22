@@ -27,7 +27,7 @@ export const RegisterPage = () => {
     const lowercaseRegex = /[a-z]/;
     const uppercaseRegex = /[A-Z]/;
     const digitRegex = /[0-9]/;
-    const specialCharRegex = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\-]/;
+    const specialCharRegex = /[!@#$%^&*()_+{}[\]:;<>,.?~\\-]/;
 
     let score = 0;
 

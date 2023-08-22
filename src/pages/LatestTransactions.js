@@ -1,11 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import Table from "react-bootstrap/Table";
 import "../styles/LatestTransactions.css"; // Import your custom CSS file
 
 export const LatestTransactions = () => {
-  const paymentTypes = ["Card Payment", "Cash"];
-  const categories = ["Clothes", "Food", "Pharmacy"];
-
   const generateRandomDate = () => {
     const startDate = new Date("2023-01-01");
     const endDate = new Date(); // Current date
@@ -25,7 +22,9 @@ export const LatestTransactions = () => {
     return `$-${(10 + Math.random() * 90).toFixed(2)}`;
   };
 
-  const generateRandomTransaction = () => {
+  const generateRandomTransaction = useCallback(() => {
+    const paymentTypes = ["Card Payment", "Cash"];
+    const categories = ["Clothes", "Food", "Pharmacy"];
     const paymentType =
       paymentTypes[Math.floor(Math.random() * paymentTypes.length)];
     const category = categories[Math.floor(Math.random() * categories.length)];
@@ -38,7 +37,7 @@ export const LatestTransactions = () => {
       date,
       amount,
     };
-  };
+  }, []);
 
   useEffect(() => {
     const transactions = Array.from({ length: 10 }, () =>
@@ -54,7 +53,7 @@ export const LatestTransactions = () => {
       row.insertCell(2).textContent = transaction.category;
       row.insertCell(3).textContent = transaction.amount;
     });
-  }, []);
+  }, [generateRandomTransaction]);
 
   return (
     <div className="dashboard-container">
