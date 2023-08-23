@@ -50,6 +50,7 @@
 
 .content {
   width: 80%;
+  margin: auto;
   padding: 20px;
   background-color: white;
 }
@@ -83,4 +84,8 @@
 
 .message {
   margin-top: 20px;
+}
+
+Button {
+  max-width: 20%;
 }
