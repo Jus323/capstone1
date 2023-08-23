@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
-import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
 import { Link } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
 import Logo from "../img/logo.jpg";
 import "../styles/HomePage.css";
-import { useAuth } from "../hooks/useAuth";
 import { LatestTransactions } from "./LatestTransactions";
 import { PieChart } from "./PieChart";
 
@@ -28,6 +28,9 @@ export const HomePage = () => {
         <Navbar bg="primary" expand="lg">
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ml-auto nav-links">
+              <Link to="/aboutus" className="nav-link">
+                About Us
+              </Link>
               <Link to="/home" className="nav-link">
                 Home
               </Link>
