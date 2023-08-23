@@ -16,6 +16,7 @@ export const ProfileEditPage = () => {
   // input check
   function requirement_check() {
     // adult for registration
+    // TODO: validity of birthday is age 18 years
     if (!user.dateOfBirth) {
       alert("Birthday: Please enter a valid birthday!");
       return false;
@@ -53,13 +54,13 @@ export const ProfileEditPage = () => {
 
     if (requirement_check()) {
       editProfile(user).then((success) => {
-        if (!success) {
+        if (success) {
+          navigate("/home");
+        } else {
           alert("Please check your inputs! :(");
         }
       });
     }
-
-    navigate("/home");
   };
   const handlecancelclick = () => {
     navigate("/register");
@@ -131,8 +132,10 @@ export const ProfileEditPage = () => {
             ></input>
           </div>
 
-          <button onClick={handleupdateclick}>Update</button>
-          <button onClick={handlecancelclick}>Cancel</button>
+          <button type="submit">Update</button>
+          <button type="button" onClick={handlecancelclick}>
+            Cancel
+          </button>
         </form>
       </div>
     </div>
