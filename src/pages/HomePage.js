@@ -45,17 +45,17 @@ export const HomePage = () => {
           <img src={Logo} alt="Company Logo" />
           <h1>Yew Ohh Bee</h1>
         </p>
-        <div>
+        <div className="btn">
           <h1>Account Balance: {mask ? " ******" : `$${num}`}</h1>
           <Button variant="warning" onClick={() => setMask(!mask)}>
             Show Account Balance
           </Button>
         </div>
 
-        <div>
+        <div className="btn">
           <Button variant="dark">Deposit</Button>
         </div>
-        <div>
+        <div className="btn">
           <Button variant="dark">Withdraw</Button>
         </div>
       </div>
