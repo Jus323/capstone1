@@ -79,7 +79,6 @@ export const AuthProvider = ({ children }) => {
                 lastName: data.lastName,
                 address: data.address,
                 contactNumber: data.contactNumber,
-                nric: data.nric,
                 dateOfBirth: data.dateOfBirth,
               },
             ]),
@@ -90,7 +89,6 @@ export const AuthProvider = ({ children }) => {
           lastName: data.lastName,
           address: data.address,
           contactNumber: data.contactNumber,
-          nric: data.nric,
           dateOfBirth: data.dateOfBirth,
         });
         navigate("/");
