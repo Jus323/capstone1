@@ -17,9 +17,11 @@ export const ProfileEditPage = () => {
   function requirement_check() {
     // adult for registration
     // TODO: validity of birthday is age 18 years
-    if (!user.dateOfBirth) {
-      alert("Birthday: Please enter a valid birthday!");
-      return false;
+    if (user.dateOfBirth !== "") {
+      if (!user.dateOfBirth) {
+        alert("Birthday: Please enter a valid birthday!");
+        return false;
+      }
     }
 
     //first name
@@ -45,6 +47,7 @@ export const ProfileEditPage = () => {
         return false;
       }
     }
+    return true;
   }
 
   const navigate = useNavigate();
