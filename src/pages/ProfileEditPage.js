@@ -17,9 +17,17 @@ export const ProfileEditPage = () => {
   function requirement_check() {
     // adult for registration
     // TODO: validity of birthday is age 18 years
-    if (user.dateOfBirth !== "") {
-      if (!user.dateOfBirth) {
-        alert("Birthday: Please enter a valid birthday!");
+    if (user.dateOfBirth !== "" && !user.dateOfBirth) {
+      alert("Birthday: Please enter a valid birthday!");
+      return false;
+    } else if (user.dateOfBirth) {
+      const currentDate = new Date();
+      const birthday = new Date(user.dateOfBirth);
+      var timsedifference =
+        (currentDate - birthday) / (1000 * 60 * 60 * 24 * 365);
+      console.log("this is timediff", timsedifference);
+      if (timsedifference < 18) {
+        alert("No kids, this is an adult webpage!");
         return false;
       }
     }
