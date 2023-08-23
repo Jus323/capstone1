@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../styles/ForgotPasswordPage.css";
 import { useAuth } from "../hooks/useAuth";
+import { Link as RouterLink } from "react-router-dom";
 
 export const ForgotPasswordPage = () => {
   const { resetPassword } = useAuth();
@@ -46,6 +47,9 @@ export const ForgotPasswordPage = () => {
             placeholder="Password"
           ></input>
           <button type="submit">Reset</button>
+          <RouterLink to="/">
+            <button className="secondary">Back</button>
+          </RouterLink>
         </form>
       </div>
     </div>
