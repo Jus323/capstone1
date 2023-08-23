@@ -13,6 +13,23 @@
   }
 }
 
+.padding {
+  padding: 5px;
+}
+
+.parent {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 20px;
+  margin: 10px;
+}
+
+.card-with-spacing {
+  margin: 10px;
+  width: "18rem";
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;

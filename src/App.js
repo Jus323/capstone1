@@ -1,13 +1,14 @@
-import { Routes, Route } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
+import "./App.css";
+import { ProtectedRoute } from "./components/ProtectedRoute";
+import { UnprotectedRoute } from "./components/UnprotectedRoute";
+import { AuthProvider } from "./hooks/useAuth";
+import { AboutUsPage } from "./pages/AboutUs";
+import { ForgotPasswordPage } from "./pages/ForgotPasswordPage";
 import { HomePage } from "./pages/HomePage";
 import { LoginPage } from "./pages/LoginPage";
-import { RegisterPage } from "./pages/RegisterPage";
-import { ForgotPasswordPage } from "./pages/ForgotPasswordPage";
-import { ProtectedRoute } from "./components/ProtectedRoute";
-import "./App.css";
-import { AuthProvider } from "./hooks/useAuth";
 import { ProfileEditPage } from "./pages/ProfileEditPage";
-import { UnprotectedRoute } from "./components/UnprotectedRoute";
+import { RegisterPage } from "./pages/RegisterPage";
 
 function App() {
   return (
@@ -51,6 +52,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <HomePage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/aboutus"
+            element={
+              <ProtectedRoute>
+                <AboutUsPage />
               </ProtectedRoute>
             }
           />
