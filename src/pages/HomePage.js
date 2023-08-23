@@ -52,8 +52,12 @@ export const HomePage = () => {
           </Button>
         </div>
 
-        <Button variant="dark">Deposit</Button>
-        <Button variant="dark">Withdraw</Button>
+        <div>
+          <Button variant="dark">Deposit</Button>
+        </div>
+        <div>
+          <Button variant="dark">Withdraw</Button>
+        </div>
       </div>
       <div className="content">
         <h2>Welcome Home, {user.firstName}</h2>
