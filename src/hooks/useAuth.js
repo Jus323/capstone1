@@ -35,7 +35,9 @@ export const AuthProvider = ({ children }) => {
   // call this function to register a new user
   const addUser = useCallback(
     async (newUser) => {
-      const exists = users.some((user) => user.nric === newUser.nric);
+      const exists = users.some(
+        (user) => user.nric === newUser.nric || user.email === newUser.email,
+      );
       if (!exists) {
         setUsers([...users, newUser]);
       }

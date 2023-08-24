@@ -134,7 +134,7 @@ export const RegisterPage = () => {
           alert("User created!");
           navigate("/");
         } else {
-          alert("User NRIC exists");
+          alert("User NRIC/Email exists");
         }
       });
     }
